@@ -3,11 +3,14 @@
   hosts: prod
   become: true
   gather_facts: yes
-  vars:
-    ansible_sudo_pass: admin
   pre_tasks:
-    - name: Install EPEL repo
-      package: name=epel-release state=present
+    - name: Install EPEL repo, git and wget
+      yum:
+        name:
+          - epel-release
+          - git
+          - wget
+        state: present
       when: ansible_distribution == "CentOS"
     - name: download pip script
       get_url:
@@ -17,10 +20,17 @@
       command: python2.7 /tmp/get-pip.py
     - name: Install docker python
       pip: name=docker-py
+
   tasks:
+    - name: Copy websites file template
+      template:
+        src: index.html.j2
+        dest: /home/admin/index.html
     - name: Apache installation
       docker_container:
         name: apache
         image: httpd
         ports:
         - "80:80"
+        volumes:
+          - /home/admin/index.html:/usr/local/apache2/htdocs/index.html
