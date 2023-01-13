@@ -3,6 +3,8 @@
   hosts: prod
   become: true
   gather_facts: yes
+  vars_files:
+    - files/secrets/credentials.yml
   pre_tasks:
     - name: Install EPEL repo, git and wget
       yum:
@@ -30,6 +32,7 @@
       docker_container:
         name: apache
         image: httpd
+        state: started
         ports:
         - "80:80"
         volumes:
