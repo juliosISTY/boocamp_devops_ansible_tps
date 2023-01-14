@@ -16,11 +16,13 @@ To generate ssh key and copy it to the remote host, run these commands below:
 # Roles Ansible
 
 Other method to run your rule from git is to, in your rule folder add requirements.yml file with this content:
+
 Yaml```
 ---
-# Install a role for Wordpress
+#### Install a role for Wordpress
 - src: https://github.com/diranetafen/ansible-role-containerized-wordpress.git
 ```
+
 Then update wordpress.yml with this content
 Yaml```
 ---
