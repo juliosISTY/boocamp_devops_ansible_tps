@@ -19,7 +19,6 @@ Other method to run your rule from git is to, in your rule folder add requiremen
 
 Yaml```
 ---
-#### Install a role for Wordpress
 - src: https://github.com/diranetafen/ansible-role-containerized-wordpress.git
 ```
 
