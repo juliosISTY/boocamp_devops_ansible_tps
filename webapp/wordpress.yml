@@ -1,0 +1,9 @@
+---
+- name: "deployment of Wordpress"
+  hosts: prod
+  become: true
+  gather_facts: yes
+  vars_files:
+    - files/secrets/credentials.yml
+  roles:
+    - {role: ansible-role-containerized-wordpress}
